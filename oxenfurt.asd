@@ -17,5 +17,6 @@
                (:file "documentation"))
   :depends-on (:documentation-utils
                :alexandria
+               :babel
                :drakma
                :yason))
