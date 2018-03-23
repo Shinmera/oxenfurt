@@ -132,7 +132,7 @@
                                       ("offset" . ,(princ-to-string offset))
                                       ("limit" . ,(princ-to-string limit))))))
 
-(defun wordlist (&key (source-lang "en") filters exclude exclude-senses exclude-prime-senses word-length prefix exact (offset 0) (limit 5000))
+(defun list-words (&key (source-lang "en") filters exclude exclude-senses exclude-prime-senses word-length prefix exact (offset 0) (limit 5000))
   (into 'word (request "/wordlist" (list source-lang (serialize-filters filters))
                        :parameters `(("exclude" . ,(serialize-filters exclude))
                                      ("exclude_senses" . ,(serialize-filters exclude-senses))
