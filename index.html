@@ -1,0 +1,527 @@
+<!DOCTYPE html> <html xmlns="http://www.w3.org/1999/xhtml"> <head> <meta charset="utf-8"> <title>Oxenfurt</title> <meta name="viewport" content="width=device-width"> <meta name="description" content="A client for the Oxford dictionary API."> <meta name="author" content="Nicolas Hafner &lt;shinmera@tymoon.eu&gt;"> <style type="text/css"> body{
+          max-width: 1024px;
+          margin: 0 auto 0 auto;
+          font-family: sans-serif;
+          color: #333333;
+          font-size: 14pt;
+          padding: 5px;
+      }
+      body>header{
+          display:flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          max-width: 100%;
+          text-align: center;
+      }
+      body>header img{
+          max-width: 50%;
+      }
+      img{
+          max-width: 100%;
+          max-height: 100%;
+      }
+      code{
+          font-family: Consolas, Inconsolata, monospace;
+      }
+      a{
+          text-decoration: none;
+          color: #0055AA;
+      }
+      a img{
+          border: none;
+      }
+      #documentation{
+          text-align: justify;
+      }
+      #documentation pre{
+          margin-left: 20px;
+          overflow: auto;
+      }
+      #documentation img{
+          margin: 5px;
+      }
+      #symbol-index>ul{
+          list-style: none;
+          padding: 0;
+      }
+      #symbol-index .package>ul{
+          list-style: none;
+          padding: 0 0 0 10px;
+      }
+      #symbol-index .package .nicknames{
+          font-weight: normal;
+      }
+      #symbol-index .package h4{
+          display: inline-block;
+          margin: 0;
+      }
+      #symbol-index .package article{
+          margin: 0 0 15px 0;
+      }
+      #symbol-index .package article header{
+          font-size: 1.2em;
+          font-weight: normal;
+      }
+      #symbol-index .package .name{
+          margin-right: 5px;
+      }
+      #symbol-index .package .docstring{
+          margin: 0 0 0 15px;
+          white-space: pre-wrap;
+          font-size: 12pt;
+      }
+      @media (max-width: 800px){
+          body{font-size: 12pt;}
+      } </style> </head> <body> <header> <h1>oxenfurt</h1> <span class="version">1.0.0</span> <p class="description">A client for the Oxford dictionary API.</p> </header> <main> <article id="documentation">  <div><h2 id="about_oxenfurt">About Oxenfurt</h2> <p>This library implements a client for the [Oxford dictionary API](A given written or spoken realisation of a an entry, lowercased.). It gives you full access to the available REST endpoints and transforms all results into native Lisp instances for easy handling.</p> <h2 id="how_to">How To</h2> <p>First you'll need to sign up for their API and get the App keys. Once you have registered, you can find the keys <a href="https://developer.oxforddictionaries.com/admin/applications">here</a>. Then, set the library up with your keys:</p> <pre><code>(<a href="http://l1sp.org/cl/setf">setf</a> oxenfurt:*app-id* &quot;dadwadwwada&quot;
+      oxenfurt:*app-key* &quot;2131831273189addhadwhauidhalidhwa&quot;)
+</code></pre> <p>Once that's done, you should be able to query the API to your heart's content... within the restrictions imposed by your account's plan of course.</p> <p>Oxford's API is fairly extensive in what it returns. For instance, if we look at the result for &quot;lisp&quot;:</p> <pre><code>(<a href="#OXENFURT:LEXICAL-ENTRIES">lexical-entries</a> (<a href="#OXENFURT:FIND-WORD">find-word</a> &quot;lisp&quot;))
+; =&gt; (#&lt;LEXICAL-ENTRY &quot;lisp&quot; EN&gt; #&lt;LEXICAL-ENTRY &quot;lisp&quot; EN&gt; #&lt;LEXICAL-ENTRY &quot;Lisp&quot; EN&gt;)
+
+(<a href="http://l1sp.org/cl/describe">describe</a> (<a href="http://l1sp.org/cl/first">first</a> *))
+; #&lt;LEXICAL-ENTRY &quot;lisp&quot; EN&gt;
+;   [standard-object]
+; 
+; Slots with :INSTANCE allocation:
+;   GRAMMATICAL-FEATURES           = NIL
+;   INFLECTION-OF                  = NIL
+;   LANGUAGE                       = :EN
+;   LEXICAL-CATEGORY               = :NOUN
+;   TEXT                           = &quot;lisp&quot;
+;   DERIVATIVE-OF                  = NIL
+;   DERIVATIVES                    = (#&lt;DERIVATIVE &quot;lisper&quot; NIL&gt;)
+;   ENTRIES                        = (#&lt;ENTRY {1006578ED3}&gt;)
+;   NOTES                          = NIL
+;   PRONUNCIATIONS                 = (#&lt;PRONUNCIATION &quot;lÉªsp&quot; (IPA) British English&gt;)
+;   VARIANT-FORMS                  = NIL
+;   SENTENCES                      = NIL
+</code></pre> <p>While Oxford's API documentation does cover everything, it is a bit obtuse to handle. The documentation of this project includes descriptions for every object type and field that is returned, perhaps that will be easier to navigate.</p> </div>  </article> <article id="copyright">  <h2>Copyright</h2> <span>oxenfurt</span> is licensed under the <span><a href="https://tldrlegal.com/search?q=Artistic">Artistic</a></span> license.  © <span>Nicolas Hafner &lt;shinmera@tymoon.eu&gt;</span> .  This library can be obtained on <a href="https://github.com/Shinmera/oxenfurt">https://github.com/Shinmera/oxenfurt</a>.  </article>  <article id="symbol-index"> <h2>Package Index</h2> <ul><li class="package"> <h3> <a name="OXENFURT" href="#OXENFURT">OXENFURT</a> <span class="nicknames">(ORG.SHIRAKUMO.OXENFURT)</span> </h3> <ul><li> <a name="OXENFURT:*API*"> </a> <article id="SPECIAL OXENFURT:*API*"> <header class="special"> <span class="type">special</span>  <h4 class="name"><code><a href="#SPECIAL%20OXENFURT%3A%2AAPI%2A">*API*</a></code></h4>  </header> <div class="docstring"><pre>The base endpoint URL of the Oxford dictionary API.</pre></div> </article> </li><li> <a name="OXENFURT:*APP-ID*"> </a> <article id="SPECIAL OXENFURT:*APP-ID*"> <header class="special"> <span class="type">special</span>  <h4 class="name"><code><a href="#SPECIAL%20OXENFURT%3A%2AAPP-ID%2A">*APP-ID*</a></code></h4>  </header> <div class="docstring"><pre>Your Oxford dictionary API app ID.
+
+See https://developer.oxforddictionaries.com/admin/applications</pre></div> </article> </li><li> <a name="OXENFURT:*APP-KEY*"> </a> <article id="SPECIAL OXENFURT:*APP-KEY*"> <header class="special"> <span class="type">special</span>  <h4 class="name"><code><a href="#SPECIAL%20OXENFURT%3A%2AAPP-KEY%2A">*APP-KEY*</a></code></h4>  </header> <div class="docstring"><pre>Your Oxford dictionary API app key.
+
+See https://developer.oxforddictionaries.com/admin/applications</pre></div> </article> </li><li> <a name="OXENFURT:CROSS-REFERENCE"> </a> <article id="CLASS OXENFURT:CROSS-REFERENCE"> <header class="class"> <span class="type">class</span>  <h4 class="name"><code><a href="#CLASS%20OXENFURT%3ACROSS-REFERENCE">CROSS-REFERENCE</a></code></h4>  </header> <div class="docstring"><pre>Represents a cross reference between senses.
+
+The KIND shows how the words are related. Can be either
+:close-match :related :see-also :variant-spelling :abbreviation
+:pre :post.
+
+See <a href="#OXENFURT:ID">ID</a>
+See <a href="#OXENFURT:TEXT">TEXT</a>
+See <a href="#OXENFURT:KIND">KIND</a></pre></div> </article> </li><li> <a name="OXENFURT:DERIVATIVE"> </a> <article id="CLASS OXENFURT:DERIVATIVE"> <header class="class"> <span class="type">class</span>  <h4 class="name"><code><a href="#CLASS%20OXENFURT%3ADERIVATIVE">DERIVATIVE</a></code></h4>  </header> <div class="docstring"><pre>Represents a related entry of a sense.
+
+See <a href="#OXENFURT:DOMAINS">DOMAINS</a>
+See <a href="#OXENFURT:ID">ID</a>
+See <a href="#OXENFURT:LANGUAGE">LANGUAGE</a>
+See <a href="#OXENFURT:REGIONS">REGIONS</a>
+See <a href="#OXENFURT:REGISTERS">REGISTERS</a>
+See <a href="#OXENFURT:TEXT">TEXT</a></pre></div> </article> </li><li> <a name="OXENFURT:ENTRY"> </a> <article id="CLASS OXENFURT:ENTRY"> <header class="class"> <span class="type">class</span>  <h4 class="name"><code><a href="#CLASS%20OXENFURT%3AENTRY">ENTRY</a></code></h4>  </header> <div class="docstring"><pre>A word entry in a lexical entry.
+
+See <a href="#OXENFURT:ETYMOLOGIES">ETYMOLOGIES</a>
+See <a href="#OXENFURT:GRAMMATICAL-FEATURES">GRAMMATICAL-FEATURES</a>
+See <a href="#OXENFURT:HOMOGRAPH-NUMBER">HOMOGRAPH-NUMBER</a>
+See <a href="#OXENFURT:NOTES">NOTES</a>
+See <a href="#OXENFURT:PRONUNCIATIONS">PRONUNCIATIONS</a>
+See <a href="#OXENFURT:SENSES">SENSES</a>
+See <a href="#OXENFURT:VARIANT-FORMS">VARIANT-FORMS</a></pre></div> </article> </li><li> <a name="OXENFURT:EXAMPLE"> </a> <article id="CLASS OXENFURT:EXAMPLE"> <header class="class"> <span class="type">class</span>  <h4 class="name"><code><a href="#CLASS%20OXENFURT%3AEXAMPLE">EXAMPLE</a></code></h4>  </header> <div class="docstring"><pre>Represents an example usage of a word.
+
+See <a href="#OXENFURT:DEFINITIONS">DEFINITIONS</a>
+See <a href="#OXENFURT:DOMAINS">DOMAINS</a>
+See <a href="#OXENFURT:NOTES">NOTES</a>
+See <a href="#OXENFURT:REGIONS">REGIONS</a>
+See <a href="#OXENFURT:REGISTERS">REGISTERS</a>
+See <a href="#OXENFURT:SENSE-IDS">SENSE-IDS</a>
+See <a href="#OXENFURT:TEXT">TEXT</a>
+See <a href="#OXENFURT:TRANSLATIONS">TRANSLATIONS</a></pre></div> </article> </li><li> <a name="OXENFURT:FREQUENCY"> </a> <article id="CLASS OXENFURT:FREQUENCY"> <header class="class"> <span class="type">class</span>  <h4 class="name"><code><a href="#CLASS%20OXENFURT%3AFREQUENCY">FREQUENCY</a></code></h4>  </header> <div class="docstring"><pre>Container for frequency information of a word or ngram.
+
+In the case of an ngram frequency, only the FREQUENCY and
+the TOKENS fields are guaranteed to be set.
+
+See <a href="#OXENFURT:FREQUENCY">FREQUENCY</a>
+See <a href="#OXENFURT:NORMALIZED-FREQUENCY">NORMALIZED-FREQUENCY</a>
+See <a href="#OXENFURT:LEMMA">LEMMA</a>
+See <a href="#OXENFURT:NORMALIZED-LEMMA">NORMALIZED-LEMMA</a>
+See <a href="#OXENFURT:TOKENS">TOKENS</a>
+See <a href="#OXENFURT:LEXICAL-CATEGORY">LEXICAL-CATEGORY</a>
+See <a href="#OXENFURT:GRAMMATICAL-FEATURES">GRAMMATICAL-FEATURES</a>
+See <a href="#OXENFURT:COMPONENTS">COMPONENTS</a>
+See <a href="#OXENFURT:FIRST-MENTION">FIRST-MENTION</a>
+See <a href="#OXENFURT:TRUE-CASE">TRUE-CASE</a>
+See <a href="#OXENFURT:WORDFORM">WORDFORM</a></pre></div> </article> </li><li> <a name="OXENFURT:LANGUAGE-DATASET"> </a> <article id="CLASS OXENFURT:LANGUAGE-DATASET"> <header class="class"> <span class="type">class</span>  <h4 class="name"><code><a href="#CLASS%20OXENFURT%3ALANGUAGE-DATASET">LANGUAGE-DATASET</a></code></h4>  </header> <div class="docstring"><pre>Container for information about a language in the API.
+
+See <a href="#OXENFURT:REGION">REGION</a>
+See <a href="#OXENFURT:SOURCE">SOURCE</a>
+See <a href="#OXENFURT:LANGUAGE">LANGUAGE</a>
+See <a href="#OXENFURT:TARGET-LANG">TARGET-LANG</a>
+See <a href="#OXENFURT:BILINGUAL-P">BILINGUAL-P</a></pre></div> </article> </li><li> <a name="OXENFURT:LEXICAL-ENTRY"> </a> <article id="CLASS OXENFURT:LEXICAL-ENTRY"> <header class="class"> <span class="type">class</span>  <h4 class="name"><code><a href="#CLASS%20OXENFURT%3ALEXICAL-ENTRY">LEXICAL-ENTRY</a></code></h4>  </header> <div class="docstring"><pre>An entry of lexical information about a word.
+
+This is the primary information container for a word.
+
+See <a href="#OXENFURT:GRAMMATICAL-FEATURES">GRAMMATICAL-FEATURES</a>
+See <a href="#OXENFURT:INFLECTION-OF">INFLECTION-OF</a>
+See <a href="#OXENFURT:LANGUAGE">LANGUAGE</a>
+See <a href="#OXENFURT:LEXICAL-CATEGORY">LEXICAL-CATEGORY</a>
+See <a href="#OXENFURT:TEXT">TEXT</a>
+See <a href="#OXENFURT:DERIVATIVE-OF">DERIVATIVE-OF</a>
+See <a href="#OXENFURT:DERIVATIVES">DERIVATIVES</a>
+See <a href="#OXENFURT:ENTRIES">ENTRIES</a>
+See <a href="#OXENFURT:NOTES">NOTES</a>
+See <a href="#OXENFURT:PRONUNCIATIONS">PRONUNCIATIONS</a>
+See <a href="#OXENFURT:VARIANT-FORMS">VARIANT-FORMS</a>
+See <a href="#OXENFURT:SENTENCES">SENTENCES</a></pre></div> </article> </li><li> <a name="OXENFURT:MATCH"> </a> <article id="CLASS OXENFURT:MATCH"> <header class="class"> <span class="type">class</span>  <h4 class="name"><code><a href="#CLASS%20OXENFURT%3AMATCH">MATCH</a></code></h4>  </header> <div class="docstring"><pre>Represents a match for a word search query.
+
+See <a href="#OXENFURT:ID">ID</a>
+See <a href="#OXENFURT:INFLECTION-ID">INFLECTION-ID</a>
+See <a href="#OXENFURT:MATCH-STRING">MATCH-STRING</a>
+See <a href="#OXENFURT:MATCH-TYPE">MATCH-TYPE</a>
+See <a href="#OXENFURT:REGION">REGION</a>
+See <a href="#OXENFURT:WORD">WORD</a>
+See <a href="#OXENFURT:SCORE">SCORE</a></pre></div> </article> </li><li> <a name="OXENFURT:NOTE"> </a> <article id="CLASS OXENFURT:NOTE"> <header class="class"> <span class="type">class</span>  <h4 class="name"><code><a href="#CLASS%20OXENFURT%3ANOTE">NOTE</a></code></h4>  </header> <div class="docstring"><pre>A human-readable note about an object.
+
+This usually contains associated, additional information for the
+human reader. The KIND is a free-form string that describes what
+this note might contain.
+
+See <a href="#OXENFURT:ID">ID</a>
+See <a href="#OXENFURT:TEXT">TEXT</a>
+See <a href="#OXENFURT:KIND">KIND</a></pre></div> </article> </li><li> <a name="OXENFURT:PRONUNCIATION"> </a> <article id="CLASS OXENFURT:PRONUNCIATION"> <header class="class"> <span class="type">class</span>  <h4 class="name"><code><a href="#CLASS%20OXENFURT%3APRONUNCIATION">PRONUNCIATION</a></code></h4>  </header> <div class="docstring"><pre>Represents information about the pronunciation of a lexical entry.
+
+See <a href="#OXENFURT:AUDIO-FILE">AUDIO-FILE</a>
+See <a href="#OXENFURT:DIALECTS">DIALECTS</a>
+See <a href="#OXENFURT:REGIONS">REGIONS</a>
+See <a href="#OXENFURT:PHONETIC-NOTATION">PHONETIC-NOTATION</a>
+See <a href="#OXENFURT:PHONETIC-SPELLING">PHONETIC-SPELLING</a></pre></div> </article> </li><li> <a name="OXENFURT:SENSE"> </a> <article id="CLASS OXENFURT:SENSE"> <header class="class"> <span class="type">class</span>  <h4 class="name"><code><a href="#CLASS%20OXENFURT%3ASENSE">SENSE</a></code></h4>  </header> <div class="docstring"><pre>Represents information about a specific sense or meaning of a word.
+
+See <a href="#OXENFURT:CROSS-REFERENCE-MARKERS">CROSS-REFERENCE-MARKERS</a>
+See <a href="#OXENFURT:CROSS-REFERENCES">CROSS-REFERENCES</a>
+See <a href="#OXENFURT:DEFINITIONS">DEFINITIONS</a>
+See <a href="#OXENFURT:DOMAINS">DOMAINS</a>
+See <a href="#OXENFURT:EXAMPLES">EXAMPLES</a>
+See <a href="#OXENFURT:ID">ID</a>
+See <a href="#OXENFURT:NOTES">NOTES</a>
+See <a href="#OXENFURT:PRONUNCIATIONS">PRONUNCIATIONS</a>
+See <a href="#OXENFURT:REGIONS">REGIONS</a>
+See <a href="#OXENFURT:REGISTERS">REGISTERS</a>
+See <a href="#OXENFURT:SUBSENSES">SUBSENSES</a>
+See <a href="#OXENFURT:TRANSLATIONS">TRANSLATIONS</a>
+See <a href="#OXENFURT:VARIANT-FORMS">VARIANT-FORMS</a></pre></div> </article> </li><li> <a name="OXENFURT:SENTENCE"> </a> <article id="CLASS OXENFURT:SENTENCE"> <header class="class"> <span class="type">class</span>  <h4 class="name"><code><a href="#CLASS%20OXENFURT%3ASENTENCE">SENTENCE</a></code></h4>  </header> <div class="docstring"><pre>Represents information about an example usage sentence for a word.
+
+See <a href="#OXENFURT:DEFINITIONS">DEFINITIONS</a>
+See <a href="#OXENFURT:DOMAINS">DOMAINS</a>
+See <a href="#OXENFURT:NOTES">NOTES</a>
+See <a href="#OXENFURT:REGIONS">REGIONS</a>
+See <a href="#OXENFURT:REGISTERS">REGISTERS</a>
+See <a href="#OXENFURT:SENSE-IDS">SENSE-IDS</a>
+See <a href="#OXENFURT:TEXT">TEXT</a>
+See <a href="#OXENFURT:TRANSLATIONS">TRANSLATIONS</a></pre></div> </article> </li><li> <a name="OXENFURT:TRANSLATION"> </a> <article id="CLASS OXENFURT:TRANSLATION"> <header class="class"> <span class="type">class</span>  <h4 class="name"><code><a href="#CLASS%20OXENFURT%3ATRANSLATION">TRANSLATION</a></code></h4>  </header> <div class="docstring"><pre>Represents information about a translation of a word into a different language.
+
+See <a href="#OXENFURT:DOMAINS">DOMAINS</a>
+See <a href="#OXENFURT:GRAMMATICAL-FEATURES">GRAMMATICAL-FEATURES</a>
+See <a href="#OXENFURT:LANGUAGE">LANGUAGE</a>
+See <a href="#OXENFURT:NOTES">NOTES</a>
+See <a href="#OXENFURT:REGIONS">REGIONS</a>
+See <a href="#OXENFURT:REGISTERS">REGISTERS</a>
+See <a href="#OXENFURT:TEXT">TEXT</a></pre></div> </article> </li><li> <a name="OXENFURT:VARIANT-FORM"> </a> <article id="CLASS OXENFURT:VARIANT-FORM"> <header class="class"> <span class="type">class</span>  <h4 class="name"><code><a href="#CLASS%20OXENFURT%3AVARIANT-FORM">VARIANT-FORM</a></code></h4>  </header> <div class="docstring"><pre>Represents information about an alternate form of a word that can be used interchangeably.
+
+See <a href="#OXENFURT:REGIONS">REGIONS</a>
+See <a href="#OXENFURT:TEXT">TEXT</a></pre></div> </article> </li><li> <a name="OXENFURT:WORD"> </a> <article id="CLASS OXENFURT:WORD"> <header class="class"> <span class="type">class</span>  <h4 class="name"><code><a href="#CLASS%20OXENFURT%3AWORD">WORD</a></code></h4>  </header> <div class="docstring"><pre>Represents a specific word in the dictionary.
+
+See <a href="#OXENFURT:ID">ID</a>
+See <a href="#OXENFURT:LANGUAGE">LANGUAGE</a>
+See <a href="#OXENFURT:LEXICAL-ENTRIES">LEXICAL-ENTRIES</a>
+See <a href="#OXENFURT:PRONUNCIATIONS">PRONUNCIATIONS</a>
+See <a href="#OXENFURT:WORD">WORD</a></pre></div> </article> </li><li> <a name="OXENFURT:API-CALL-FAILED"> </a> <article id="CONDITION OXENFURT:API-CALL-FAILED"> <header class="condition"> <span class="type">condition</span>  <h4 class="name"><code><a href="#CONDITION%20OXENFURT%3AAPI-CALL-FAILED">API-CALL-FAILED</a></code></h4>  </header> <div class="docstring"><pre>Error signalled whenever an API call fails for whatever reason.
+
+See <a href="#OXENFURT:URL">URL</a>
+See <a href="#OXENFURT:RESULT">RESULT</a>
+See <a href="#OXENFURT:BODY">BODY</a>
+See REQUEST</pre></div> </article> </li><li> <a name="OXENFURT:FIND-WORD"> </a> <article id="FUNCTION OXENFURT:FIND-WORD"> <header class="function"> <span class="type">function</span>  <code>(</code><h4 class="name"><code><a href="#FUNCTION%20OXENFURT%3AFIND-WORD">FIND-WORD</a></code></h4> <code class="qualifiers"></code> <code class="arguments">WORD &amp;KEY (SOURCE-LANG &quot;en&quot;) FILTERS SYNONYMS ANTONYMS TARGET-LANG SENTENCES</code><code>)</code>  </header> <div class="docstring"><pre>Retrieve dictionary information for a given word.
+
+The parameters FILTERS, SYNONYMS/ANTONYMS, TARGET-LANG, and SENTENCES
+can only be used one at a time. The API does not support, for instance,
+sentences for translations into a target language.
+
+SYNONYMS, ANTONYMS, and SENTENCES are booleans about whether to return
+information from the thesaurus or sentence lexicon for the given word.
+
+TARGET-LANG specifies a language for which translations from the given
+SOURCE-LANG of the word should be returned.
+
+FILTERS can be a plist of filter keys to lists of filter values.
+See <a href="#OXENFURT:LIST-FILTERS">LIST-FILTERS</a> for the possible combinations. One additional, special
+filter is possible that cannot be combined with other filters: :REGION.
+Its value should be a list of available regions to which to constrain
+word results. See LIST-REGIONS for possible region names.
+
+See <a href="#OXENFURT:WORD">WORD</a></pre></div> </article> </li><li> <a name="OXENFURT:INFLECTIONS"> </a> <article id="FUNCTION OXENFURT:INFLECTIONS"> <header class="function"> <span class="type">function</span>  <code>(</code><h4 class="name"><code><a href="#FUNCTION%20OXENFURT%3AINFLECTIONS">INFLECTIONS</a></code></h4> <code class="qualifiers"></code> <code class="arguments">WORD &amp;KEY (SOURCE-LANG &quot;en&quot;) FILTERS</code><code>)</code>  </header> <div class="docstring"><pre>Check whether a given word exists in the dictionary and retrieve its root form.
+
+See <a href="#OXENFURT:WORD">WORD</a></pre></div> </article> </li><li> <a name="OXENFURT:LIST-DOMAINS"> </a> <article id="FUNCTION OXENFURT:LIST-DOMAINS"> <header class="function"> <span class="type">function</span>  <code>(</code><h4 class="name"><code><a href="#FUNCTION%20OXENFURT%3ALIST-DOMAINS">LIST-DOMAINS</a></code></h4> <code class="qualifiers"></code> <code class="arguments">&amp;KEY (SOURCE-LANG &quot;en&quot;) TARGET-LANG</code><code>)</code>  </header> <div class="docstring"><pre>Returns a list of possible domains for the given language or translation.</pre></div> </article> </li><li> <a name="OXENFURT:LIST-FILTERS"> </a> <article id="FUNCTION OXENFURT:LIST-FILTERS"> <header class="function"> <span class="type">function</span>  <code>(</code><h4 class="name"><code><a href="#FUNCTION%20OXENFURT%3ALIST-FILTERS">LIST-FILTERS</a></code></h4> <code class="qualifiers"></code> <code class="arguments">&amp;OPTIONAL ENDPOINT</code><code>)</code>  </header> <div class="docstring"><pre>Returns a list of possible filters, either for each endpoint, or for a particular one.</pre></div> </article> </li><li> <a name="OXENFURT:LIST-GRAMMATICAL-FEATURES"> </a> <article id="FUNCTION OXENFURT:LIST-GRAMMATICAL-FEATURES"> <header class="function"> <span class="type">function</span>  <code>(</code><h4 class="name"><code><a href="#FUNCTION%20OXENFURT%3ALIST-GRAMMATICAL-FEATURES">LIST-GRAMMATICAL-FEATURES</a></code></h4> <code class="qualifiers"></code> <code class="arguments">&amp;KEY (SOURCE-LANG &quot;en&quot;)</code><code>)</code>  </header> <div class="docstring"><pre>Returns a plist of grammatical features to their possible values for the given language.</pre></div> </article> </li><li> <a name="OXENFURT:LIST-LANGUAGES"> </a> <article id="FUNCTION OXENFURT:LIST-LANGUAGES"> <header class="function"> <span class="type">function</span>  <code>(</code><h4 class="name"><code><a href="#FUNCTION%20OXENFURT%3ALIST-LANGUAGES">LIST-LANGUAGES</a></code></h4> <code class="qualifiers"></code> <code class="arguments">&amp;KEY SOURCE-LANG TARGET-LANG</code><code>)</code>  </header> <div class="docstring"><pre>Returns a list of LANGUAGE-DATASETs that the API supports.
+
+If source-lang is given, only that language is returned.
+If source- and target-lang are given, the API only succeeds if a
+translation from source to target is possible.
+
+See <a href="#OXENFURT:LANGUAGE-DATASET">LANGUAGE-DATASET</a></pre></div> </article> </li><li> <a name="OXENFURT:LIST-LEXICAL-CATEGORIES"> </a> <article id="FUNCTION OXENFURT:LIST-LEXICAL-CATEGORIES"> <header class="function"> <span class="type">function</span>  <code>(</code><h4 class="name"><code><a href="#FUNCTION%20OXENFURT%3ALIST-LEXICAL-CATEGORIES">LIST-LEXICAL-CATEGORIES</a></code></h4> <code class="qualifiers"></code> <code class="arguments">&amp;KEY (LANGUAGE &quot;en&quot;)</code><code>)</code>  </header> <div class="docstring"><pre>Returns a list of possible lexical categories for the given language or translation.</pre></div> </article> </li><li> <a name="OXENFURT:LIST-REGIONS"> </a> <article id="FUNCTION OXENFURT:LIST-REGIONS"> <header class="function"> <span class="type">function</span>  <code>(</code><h4 class="name"><code><a href="#FUNCTION%20OXENFURT%3ALIST-REGIONS">LIST-REGIONS</a></code></h4> <code class="qualifiers"></code> <code class="arguments">&amp;KEY (SOURCE-LANG &quot;en&quot;)</code><code>)</code>  </header> <div class="docstring"><pre>Returns a plist of known regions to their alternate names for the given language.</pre></div> </article> </li><li> <a name="OXENFURT:LIST-REGISTERS"> </a> <article id="FUNCTION OXENFURT:LIST-REGISTERS"> <header class="function"> <span class="type">function</span>  <code>(</code><h4 class="name"><code><a href="#FUNCTION%20OXENFURT%3ALIST-REGISTERS">LIST-REGISTERS</a></code></h4> <code class="qualifiers"></code> <code class="arguments">&amp;KEY (SOURCE-LANG &quot;en&quot;) TARGET-LANG</code><code>)</code>  </header> <div class="docstring"><pre>Returns a list of possible registers for the given language or translation.</pre></div> </article> </li><li> <a name="OXENFURT:LIST-WORDS"> </a> <article id="FUNCTION OXENFURT:LIST-WORDS"> <header class="function"> <span class="type">function</span>  <code>(</code><h4 class="name"><code><a href="#FUNCTION%20OXENFURT%3ALIST-WORDS">LIST-WORDS</a></code></h4> <code class="qualifiers"></code> <code class="arguments">&amp;KEY (SOURCE-LANG &quot;en&quot;) FILTERS EXCLUDE EXCLUDE-SENSES EXCLUDE-PRIME-SENSES
+ WORD-LENGTH PREFIX EXACT (OFFSET 0) (LIMIT 5000)</code><code>)</code>  </header> <div class="docstring"><pre>List words matching certain criteria.
+
+FILTERS can be a plist of filter keys to lists of filter values.
+See <a href="#OXENFURT:LIST-FILTERS">LIST-FILTERS</a> for the possible combinations.
+
+EXCLUDE is the same as FILTERS, but excludes headwords that contain
+senses that match the exclude pattern.
+
+EXCLUDE-SENSES is the same as EXCLUDE but excludes matching senses
+for headwords.
+
+EXCLUDE-PRIME-SENSES is the same as EXCLUDE but only excludes a
+headword if the primary sense matches the pattern.
+
+WORD-LENGTH can either be an integer or a cons of (LOWER . UPPER)
+to specify the limits of the word lengths in characters. Both LOWER
+and UPPER can be NIL if the limit should only go one way.
+
+PREFIX filters to words that start with the given string.
+If EXACT is true, only exact matches are returned.
+
+See <a href="#OXENFURT:WORD">WORD</a></pre></div> </article> </li><li> <a name="OXENFURT:NGRAM-FREQUENCY"> </a> <article id="FUNCTION OXENFURT:NGRAM-FREQUENCY"> <header class="function"> <span class="type">function</span>  <code>(</code><h4 class="name"><code><a href="#FUNCTION%20OXENFURT%3ANGRAM-FREQUENCY">NGRAM-FREQUENCY</a></code></h4> <code class="qualifiers"></code> <code class="arguments">TOKENS &amp;KEY (SOURCE-LANG &quot;en&quot;) (CORPUS &quot;nmc&quot;) CONTAINS PUNCTUATION
+ (FORMAT :OUP) FREQUENCY DOCUMENT-FREQUENCY (OFFSET 0) (LIMIT 100)</code><code>)</code>  </header> <div class="docstring"><pre>Returns ngram (multiple word) frequency information.
+
+TOKENS should be either a single list of tokens for one ngram, or
+a list of lists. Each sub-list must be the same length.
+
+CORPUS should always by NMC. Other corpora will require special
+support from the Oxford API.
+
+CONTAINS can be a list of tokens. If given, only ngrams which
+match all of the given tokens. The order of the tokens is
+irrelevant.
+
+If PUNCTUATION is true, ngrams that include punctuation are also
+included in the results.
+
+FORMAT denotes whether the tokens are returned as a list or as
+a single string. For the list, choose :OUP, for a single string,
+choose :GOOGLE.
+
+FREQUENCY can be a constraint on the allowed frequency. Can be
+either a single number for an exact match, or a cons for a lower
+and upper bound. Both bounds can be NIL.
+
+DOCUMENT-FREQUENCY can be a constraint on the required frequency
+of the ngram within documents. Can be either a single number for
+an exact match, or a cons for a lower and upper bound. Both bounds
+can be NIL.
+
+See <a href="#OXENFURT:FREQUENCY">FREQUENCY</a></pre></div> </article> </li><li> <a name="OXENFURT:SEARCH-WORDS"> </a> <article id="FUNCTION OXENFURT:SEARCH-WORDS"> <header class="function"> <span class="type">function</span>  <code>(</code><h4 class="name"><code><a href="#FUNCTION%20OXENFURT%3ASEARCH-WORDS">SEARCH-WORDS</a></code></h4> <code class="qualifiers"></code> <code class="arguments">QUERY &amp;KEY (SOURCE-LANG &quot;en&quot;) PREFIX REGIONS TARGET-LANG (OFFSET 0)
+ (LIMIT 5000)</code><code>)</code>  </header> <div class="docstring"><pre>Search the dictionary for matching words.
+
+The query is matched using headwords, lemmatization, and fuzzy matching.
+
+If PREFIX is true, only words starting with the query are considered.
+
+REGIONS can be a list of regions that the words must match.
+
+When TARGET-LANG is given, the translation dictionaries are searched instead.
+
+See <a href="#OXENFURT:MATCH">MATCH</a></pre></div> </article> </li><li> <a name="OXENFURT:WORD-FREQUENCY"> </a> <article id="FUNCTION OXENFURT:WORD-FREQUENCY"> <header class="function"> <span class="type">function</span>  <code>(</code><h4 class="name"><code><a href="#FUNCTION%20OXENFURT%3AWORD-FREQUENCY">WORD-FREQUENCY</a></code></h4> <code class="qualifiers"></code> <code class="arguments">LEMMA &amp;KEY (SOURCE-LANG &quot;en&quot;) (CORPUS &quot;nmc&quot;) WORDFORM TRUE-CASE
+ LEXICAL-CATEGORY GRAMMATICAL-FEATURES SORT FREQUENCY NORMALIZED-FREQUENCY
+ OFFSET LIMIT</code><code>)</code>  </header> <div class="docstring"><pre>Returns word usage frequency information.
+
+The LEMMA can either be a single word, or a list of words. In the
+latter case, the results are split into the smallest possible units.
+
+CORPUS should always by NMC. Other corpora will require special
+support from the Oxford API.
+
+WORDFROM can be the written form of the word to look up, preserving
+the capitalisation.
+
+TRUE-CASE can be the written form of the word to look up with
+normalised case.
+
+LEXICAL-CATEGORY can be the lexical category to match for the word
+to look up. See LIST-LEXICAL-CATEGORIES for available categories.
+
+GRAMMATICAL-FEATURES should be a plist of constraints on the
+grammatical features of the specific word to look up.
+See <a href="#OXENFURT:LIST-GRAMMATICAL-FEATURES">LIST-GRAMMATICAL-FEATURES</a> for possible options.
+
+SORT should be one or more fields to sort by. Each field can
+either be the name of the field directly, or a cons where the
+cdr is one of :ASC or :DSC, denoting the sorting order. The
+available fields are :WORDFORM :TRUE-CASE :LEMMA :LEXICAL-CATEGORY
+:FREQUENCY :NORMALIZED-FREQUENCY.
+
+FREQUENCY can be a constraint on the allowed frequency. Can be
+either a single number for an exact match, or a cons for a lower
+and upper bound. Both bounds can be NIL.
+
+NORMALIZED-FREQUENCY can be a constraint on the allowed normalized
+frequency. Can be either a single number for an exact match, or a
+cons for a lower and upper bound. Both bounds can be NIL.
+
+See <a href="#OXENFURT:FREQUENCY">FREQUENCY</a></pre></div> </article> </li><li> <a name="OXENFURT:AUDIO-FILE"> </a> <article id="GENERIC OXENFURT:AUDIO-FILE"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3AAUDIO-FILE">AUDIO-FILE</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns the URL of a sound file for the pronunciation.
+
+See <a href="#OXENFURT:PRONUNCIATION">PRONUNCIATION</a></pre></div> </article> </li><li> <a name="OXENFURT:BILINGUAL-P"> </a> <article id="GENERIC OXENFURT:BILINGUAL-P"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3ABILINGUAL-P">BILINGUAL-P</a></code></h4> <code class="qualifiers"></code> <code class="arguments">DATASET</code><code>)</code>  </header> <div class="docstring"><pre>Returns whether the language is bilingual (can be translated).
+
+See <a href="#OXENFURT:LANGUAGE-DATASET">LANGUAGE-DATASET</a></pre></div> </article> </li><li> <a name="OXENFURT:BODY"> </a> <article id="GENERIC OXENFURT:BODY"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3ABODY">BODY</a></code></h4> <code class="qualifiers"></code> <code class="arguments">CONDITION</code><code>)</code>  </header> <div class="docstring"><pre>Returns the HTTP body as a string.
+
+See <a href="#OXENFURT:API-CALL-FAILED">API-CALL-FAILED</a></pre></div> </article> </li><li> <a name="OXENFURT:COMPONENTS"> </a> <article id="GENERIC OXENFURT:COMPONENTS"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3ACOMPONENTS">COMPONENTS</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns the components of a frequency result.
+
+See <a href="#OXENFURT:FREQUENCY">FREQUENCY</a></pre></div> </article> </li><li> <a name="OXENFURT:CROSS-REFERENCE-MARKERS"> </a> <article id="GENERIC OXENFURT:CROSS-REFERENCE-MARKERS"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3ACROSS-REFERENCE-MARKERS">CROSS-REFERENCE-MARKERS</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns a grouping of cross reference notes.
+
+See <a href="#OXENFURT:SENSE">SENSE</a></pre></div> </article> </li><li> <a name="OXENFURT:CROSS-REFERENCES"> </a> <article id="GENERIC OXENFURT:CROSS-REFERENCES"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3ACROSS-REFERENCES">CROSS-REFERENCES</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns a list of cross-references.
+
+See <a href="#OXENFURT:SENSE">SENSE</a></pre></div> </article> </li><li> <a name="OXENFURT:DEFINITIONS"> </a> <article id="GENERIC OXENFURT:DEFINITIONS"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3ADEFINITIONS">DEFINITIONS</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns a list of definitions for the exact meaning of the object.
+
+See <a href="#OXENFURT:SENSE">SENSE</a>
+See <a href="#OXENFURT:EXAMPLE">EXAMPLE</a>
+See <a href="#OXENFURT:SENTENCE">SENTENCE</a></pre></div> </article> </li><li> <a name="OXENFURT:DERIVATIVE-OF"> </a> <article id="GENERIC OXENFURT:DERIVATIVE-OF"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3ADERIVATIVE-OF">DERIVATIVE-OF</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns a list of other words from which this one derives.
+
+See <a href="#OXENFURT:LEXICAL-ENTRY">LEXICAL-ENTRY</a></pre></div> </article> </li><li> <a name="OXENFURT:DERIVATIVES"> </a> <article id="GENERIC OXENFURT:DERIVATIVES"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3ADERIVATIVES">DERIVATIVES</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns a list of other words which derive from this one.
+
+See <a href="#OXENFURT:LEXICAL-ENTRY">LEXICAL-ENTRY</a></pre></div> </article> </li><li> <a name="OXENFURT:DIALECTS"> </a> <article id="GENERIC OXENFURT:DIALECTS"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3ADIALECTS">DIALECTS</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns a list of dialects in which this pronunciation is used.
+
+See <a href="#OXENFURT:PRONUNCIATION">PRONUNCIATION</a></pre></div> </article> </li><li> <a name="OXENFURT:DOMAINS"> </a> <article id="GENERIC OXENFURT:DOMAINS"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3ADOMAINS">DOMAINS</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns the name of a subject, discipline, or branch of knowledge related to this object.
+
+See <a href="#OXENFURT:DERIVATIVE">DERIVATIVE</a>
+See <a href="#OXENFURT:SENSE">SENSE</a>
+See <a href="#OXENFURT:EXAMPLE">EXAMPLE</a>
+See <a href="#OXENFURT:TRANSLATION">TRANSLATION</a>
+See <a href="#OXENFURT:SENTENCE">SENTENCE</a></pre></div> </article> </li><li> <a name="OXENFURT:ENTRIES"> </a> <article id="GENERIC OXENFURT:ENTRIES"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3AENTRIES">ENTRIES</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns the list of word entries for this lexical entry.
+
+See <a href="#OXENFURT:LEXICAL-ENTRY">LEXICAL-ENTRY</a></pre></div> </article> </li><li> <a name="OXENFURT:ETYMOLOGIES"> </a> <article id="GENERIC OXENFURT:ETYMOLOGIES"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3AETYMOLOGIES">ETYMOLOGIES</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns a list of strings describing the etymology of the word.
+
+See <a href="#OXENFURT:ENTRY">ENTRY</a></pre></div> </article> </li><li> <a name="OXENFURT:EXAMPLES"> </a> <article id="GENERIC OXENFURT:EXAMPLES"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3AEXAMPLES">EXAMPLES</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns a list of example usages of the word.
+
+See <a href="#OXENFURT:SENSE">SENSE</a></pre></div> </article> </li><li> <a name="OXENFURT:FIRST-MENTION"> </a> <article id="GENERIC OXENFURT:FIRST-MENTION"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3AFIRST-MENTION">FIRST-MENTION</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns a date formatted as a string representing the time this word was first observed.
+
+See <a href="#OXENFURT:FREQUENCY">FREQUENCY</a></pre></div> </article> </li><li> <a name="OXENFURT:FREQUENCY"> </a> <article id="GENERIC OXENFURT:FREQUENCY"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3AFREQUENCY">FREQUENCY</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns a number representing the usage frequency of the word or ngram.
+
+See <a href="#OXENFURT:FREQUENCY">FREQUENCY</a></pre></div> </article> </li><li> <a name="OXENFURT:GRAMMATICAL-FEATURES"> </a> <article id="GENERIC OXENFURT:GRAMMATICAL-FEATURES"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3AGRAMMATICAL-FEATURES">GRAMMATICAL-FEATURES</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns a plist of applicable grammatical features and their values.
+
+See <a href="#OXENFURT:LEXICAL-ENTRY">LEXICAL-ENTRY</a>
+See <a href="#OXENFURT:FREQUENCY">FREQUENCY</a>
+See <a href="#OXENFURT:TRANSLATION">TRANSLATION</a>
+See <a href="#OXENFURT:ENTRY">ENTRY</a></pre></div> </article> </li><li> <a name="OXENFURT:HOMOGRAPH-NUMBER"> </a> <article id="GENERIC OXENFURT:HOMOGRAPH-NUMBER"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3AHOMOGRAPH-NUMBER">HOMOGRAPH-NUMBER</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Identifies the homograph grouping.
+
+The last two digits identify different entries of the same homograph.
+The first one/two digits identify the homograph number.
+
+See <a href="#OXENFURT:ENTRY">ENTRY</a></pre></div> </article> </li><li> <a name="OXENFURT:ID"> </a> <article id="GENERIC OXENFURT:ID"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3AID">ID</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>The identifier of the word this object is about.
+
+See <a href="#OXENFURT:NOTE">NOTE</a>
+See <a href="#OXENFURT:DERIVATIVE">DERIVATIVE</a>
+See <a href="#OXENFURT:SENSE">SENSE</a>
+See <a href="#OXENFURT:CROSS-REFERENCE">CROSS-REFERENCE</a>
+See <a href="#OXENFURT:MATCH">MATCH</a>
+See <a href="#OXENFURT:WORD">WORD</a></pre></div> </article> </li><li> <a name="OXENFURT:INFLECTION-ID"> </a> <article id="GENERIC OXENFURT:INFLECTION-ID"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3AINFLECTION-ID">INFLECTION-ID</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>The identifier for the specific inflection of the word that was matched.
+
+See <a href="#OXENFURT:MATCH">MATCH</a></pre></div> </article> </li><li> <a name="OXENFURT:INFLECTION-OF"> </a> <article id="GENERIC OXENFURT:INFLECTION-OF"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3AINFLECTION-OF">INFLECTION-OF</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns a list of word IDs for which this lexical entry is an inflection.
+
+See <a href="#OXENFURT:LEXICAL-ENTRY">LEXICAL-ENTRY</a></pre></div> </article> </li><li> <a name="OXENFURT:KIND"> </a> <article id="GENERIC OXENFURT:KIND"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3AKIND">KIND</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns an identifier for the kind of data this object carries.
+
+See <a href="#OXENFURT:NOTE">NOTE</a>
+See <a href="#OXENFURT:CROSS-REFERENCE">CROSS-REFERENCE</a></pre></div> </article> </li><li> <a name="OXENFURT:LANGUAGE"> </a> <article id="GENERIC OXENFURT:LANGUAGE"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3ALANGUAGE">LANGUAGE</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns a language identifier for which this object is meant.
+
+See <a href="#OXENFURT:DERIVATIVE">DERIVATIVE</a>
+See <a href="#OXENFURT:TRANSLATION">TRANSLATION</a>
+See <a href="#OXENFURT:LANGUAGE-DATASET">LANGUAGE-DATASET</a>
+See <a href="#OXENFURT:LEXICAL-ENTRY">LEXICAL-ENTRY</a>
+See <a href="#OXENFURT:WORD">WORD</a></pre></div> </article> </li><li> <a name="OXENFURT:LEMMA"> </a> <article id="GENERIC OXENFURT:LEMMA"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3ALEMMA">LEMMA</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns the lemma for which this frequency applies.
+
+See <a href="#OXENFURT:FREQUENCY">FREQUENCY</a></pre></div> </article> </li><li> <a name="OXENFURT:LEXICAL-CATEGORY"> </a> <article id="GENERIC OXENFURT:LEXICAL-CATEGORY"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3ALEXICAL-CATEGORY">LEXICAL-CATEGORY</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns the linguistic category for which this word qualifies.
+
+Generally the category is defined by the syntactic or morphological
+behaviour of the lexical item in question, such as noun or verb.
+
+See <a href="#OXENFURT:FREQUENCY">FREQUENCY</a>
+See <a href="#OXENFURT:LEXICAL-ENTRY">LEXICAL-ENTRY</a></pre></div> </article> </li><li> <a name="OXENFURT:LEXICAL-ENTRIES"> </a> <article id="GENERIC OXENFURT:LEXICAL-ENTRIES"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3ALEXICAL-ENTRIES">LEXICAL-ENTRIES</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns a list of lexical entries that this word represents.
+
+See <a href="#OXENFURT:WORD">WORD</a></pre></div> </article> </li><li> <a name="OXENFURT:MATCH-STRING"> </a> <article id="GENERIC OXENFURT:MATCH-STRING"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3AMATCH-STRING">MATCH-STRING</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns the string that was used to match.
+
+See <a href="#OXENFURT:MATCH">MATCH</a></pre></div> </article> </li><li> <a name="OXENFURT:MATCH-TYPE"> </a> <article id="GENERIC OXENFURT:MATCH-TYPE"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3AMATCH-TYPE">MATCH-TYPE</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns the kind of match that occurred.
+
+See <a href="#OXENFURT:MATCH">MATCH</a></pre></div> </article> </li><li> <a name="OXENFURT:NORMALIZED-FREQUENCY"> </a> <article id="GENERIC OXENFURT:NORMALIZED-FREQUENCY"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3ANORMALIZED-FREQUENCY">NORMALIZED-FREQUENCY</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns the normalized frequency number.
+
+This is the frequency per million based on a corpus.
+
+See <a href="#OXENFURT:FREQUENCY">FREQUENCY</a></pre></div> </article> </li><li> <a name="OXENFURT:NORMALIZED-LEMMA"> </a> <article id="GENERIC OXENFURT:NORMALIZED-LEMMA"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3ANORMALIZED-LEMMA">NORMALIZED-LEMMA</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns the normalised form of the lemma.
+
+See <a href="#OXENFURT:FREQUENCY">FREQUENCY</a></pre></div> </article> </li><li> <a name="OXENFURT:NOTES"> </a> <article id="GENERIC OXENFURT:NOTES"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3ANOTES">NOTES</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns a list of notes about this object.
+
+See <a href="#OXENFURT:LEXICAL-ENTRY">LEXICAL-ENTRY</a>
+See <a href="#OXENFURT:ENTRY">ENTRY</a>
+See <a href="#OXENFURT:SENSE">SENSE</a>
+See <a href="#OXENFURT:EXAMPLE">EXAMPLE</a>
+See <a href="#OXENFURT:TRANSLATION">TRANSLATION</a>
+See <a href="#OXENFURT:SENTENCE">SENTENCE</a></pre></div> </article> </li><li> <a name="OXENFURT:PHONETIC-NOTATION"> </a> <article id="GENERIC OXENFURT:PHONETIC-NOTATION"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3APHONETIC-NOTATION">PHONETIC-NOTATION</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns an identifier for the phonetic notation used to describe the pronunciation.
+
+See <a href="#OXENFURT:PRONUNCIATION">PRONUNCIATION</a></pre></div> </article> </li><li> <a name="OXENFURT:PHONETIC-SPELLING"> </a> <article id="GENERIC OXENFURT:PHONETIC-SPELLING"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3APHONETIC-SPELLING">PHONETIC-SPELLING</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns a string describing how this word should be pronounced in some notation.
+
+See <a href="#OXENFURT:PRONUNCIATION">PRONUNCIATION</a></pre></div> </article> </li><li> <a name="OXENFURT:PRONUNCIATIONS"> </a> <article id="GENERIC OXENFURT:PRONUNCIATIONS"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3APRONUNCIATIONS">PRONUNCIATIONS</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns a list of possible pronunciations for this object.
+
+See <a href="#OXENFURT:LEXICAL-ENTRY">LEXICAL-ENTRY</a>
+See <a href="#OXENFURT:ENTRY">ENTRY</a>
+See <a href="#OXENFURT:WORD">WORD</a>
+See <a href="#OXENFURT:SENSE">SENSE</a></pre></div> </article> </li><li> <a name="OXENFURT:REGION"> </a> <article id="GENERIC OXENFURT:REGION"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3AREGION">REGION</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns the name of a region for which this match applies.
+
+See <a href="#OXENFURT:MATCH">MATCH</a></pre></div> </article> </li><li> <a name="OXENFURT:REGIONS"> </a> <article id="GENERIC OXENFURT:REGIONS"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3AREGIONS">REGIONS</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns a list of region names to which this object applies.
+
+See <a href="#OXENFURT:PRONUNCIATION">PRONUNCIATION</a>
+See <a href="#OXENFURT:DERIVATIVE">DERIVATIVE</a>
+See <a href="#OXENFURT:VARIANT-FORM">VARIANT-FORM</a>
+See <a href="#OXENFURT:SENSE">SENSE</a>
+See <a href="#OXENFURT:EXAMPLE">EXAMPLE</a>
+See <a href="#OXENFURT:TRANSLATION">TRANSLATION</a>
+See <a href="#OXENFURT:SENTENCE">SENTENCE</a></pre></div> </article> </li><li> <a name="OXENFURT:REGISTERS"> </a> <article id="GENERIC OXENFURT:REGISTERS"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3AREGISTERS">REGISTERS</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns a list describing the level of language usage, typically with respect to formality.
+
+See <a href="#OXENFURT:DERIVATIVE">DERIVATIVE</a>
+See <a href="#OXENFURT:SENSE">SENSE</a>
+See <a href="#OXENFURT:EXAMPLE">EXAMPLE</a>
+See <a href="#OXENFURT:TRANSLATION">TRANSLATION</a>
+See <a href="#OXENFURT:SENTENCE">SENTENCE</a></pre></div> </article> </li><li> <a name="OXENFURT:RESULT"> </a> <article id="GENERIC OXENFURT:RESULT"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3ARESULT">RESULT</a></code></h4> <code class="qualifiers"></code> <code class="arguments">CONDITION</code><code>)</code>  </header> <div class="docstring"><pre>Returns the HTTP return code for the failed access.
+
+See <a href="#OXENFURT:API-CALL-FAILED">API-CALL-FAILED</a></pre></div> </article> </li><li> <a name="OXENFURT:SCORE"> </a> <article id="GENERIC OXENFURT:SCORE"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3ASCORE">SCORE</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns a number representing how highly this match scored in the search.
+
+See <a href="#OXENFURT:MATCH">MATCH</a></pre></div> </article> </li><li> <a name="OXENFURT:SENSE-IDS"> </a> <article id="GENERIC OXENFURT:SENSE-IDS"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3ASENSE-IDS">SENSE-IDS</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns a list of IDs for senses related to this object.
+
+See <a href="#OXENFURT:EXAMPLE">EXAMPLE</a>
+See <a href="#OXENFURT:SENTENCE">SENTENCE</a></pre></div> </article> </li><li> <a name="OXENFURT:SENSES"> </a> <article id="GENERIC OXENFURT:SENSES"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3ASENSES">SENSES</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns a list of senses for this entry.
+
+See <a href="#OXENFURT:ENTRY">ENTRY</a></pre></div> </article> </li><li> <a name="OXENFURT:SENTENCES"> </a> <article id="GENERIC OXENFURT:SENTENCES"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3ASENTENCES">SENTENCES</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns a list of example usage sentences for this lexical entry.
+
+See <a href="#OXENFURT:LEXICAL-ENTRY">LEXICAL-ENTRY</a></pre></div> </article> </li><li> <a name="OXENFURT:SOURCE"> </a> <article id="GENERIC OXENFURT:SOURCE"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3ASOURCE">SOURCE</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns a string description of the source of the dictionary.
+
+See <a href="#OXENFURT:LANGUAGE-DATASET">LANGUAGE-DATASET</a></pre></div> </article> </li><li> <a name="OXENFURT:SUBSENSES"> </a> <article id="GENERIC OXENFURT:SUBSENSES"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3ASUBSENSES">SUBSENSES</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns an ordered list of subsenses of a sense.
+
+See <a href="#OXENFURT:SENSE">SENSE</a></pre></div> </article> </li><li> <a name="OXENFURT:TARGET-LANG"> </a> <article id="GENERIC OXENFURT:TARGET-LANG"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3ATARGET-LANG">TARGET-LANG</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns a descriptor for the target language of a translation dataset.
+
+See <a href="#OXENFURT:LANGUAGE-DATASET">LANGUAGE-DATASET</a></pre></div> </article> </li><li> <a name="OXENFURT:TEXT"> </a> <article id="GENERIC OXENFURT:TEXT"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3ATEXT">TEXT</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns a full text representation of the object.
+
+See <a href="#OXENFURT:LEXICAL-ENTRY">LEXICAL-ENTRY</a>
+See <a href="#OXENFURT:NOTE">NOTE</a>
+See <a href="#OXENFURT:DERIVATIVE">DERIVATIVE</a>
+See <a href="#OXENFURT:VARIANT-FORM">VARIANT-FORM</a>
+See <a href="#OXENFURT:CROSS-REFERENCE">CROSS-REFERENCE</a>
+See <a href="#OXENFURT:EXAMPLE">EXAMPLE</a>
+See <a href="#OXENFURT:TRANSLATION">TRANSLATION</a>
+See <a href="#OXENFURT:SENTENCE">SENTENCE</a></pre></div> </article> </li><li> <a name="OXENFURT:TOKENS"> </a> <article id="GENERIC OXENFURT:TOKENS"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3ATOKENS">TOKENS</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns the ngram tokens for the frequency result.
+
+See <a href="#OXENFURT:FREQUENCY">FREQUENCY</a></pre></div> </article> </li><li> <a name="OXENFURT:TRANSLATIONS"> </a> <article id="GENERIC OXENFURT:TRANSLATIONS"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3ATRANSLATIONS">TRANSLATIONS</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns a list of translations for the given object.
+
+See <a href="#OXENFURT:SENSE">SENSE</a>
+See <a href="#OXENFURT:EXAMPLE">EXAMPLE</a>
+See <a href="#OXENFURT:SENTENCE">SENTENCE</a></pre></div> </article> </li><li> <a name="OXENFURT:TRUE-CASE"> </a> <article id="GENERIC OXENFURT:TRUE-CASE"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3ATRUE-CASE">TRUE-CASE</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns a given written realisation of an entry, typically in lower case.
+
+See <a href="#OXENFURT:FREQUENCY">FREQUENCY</a></pre></div> </article> </li><li> <a name="OXENFURT:URL"> </a> <article id="GENERIC OXENFURT:URL"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3AURL">URL</a></code></h4> <code class="qualifiers"></code> <code class="arguments">CONDITION</code><code>)</code>  </header> <div class="docstring"><pre>Returns the URL that the request tried to access.
+
+See <a href="#OXENFURT:API-CALL-FAILED">API-CALL-FAILED</a></pre></div> </article> </li><li> <a name="OXENFURT:VARIANT-FORMS"> </a> <article id="GENERIC OXENFURT:VARIANT-FORMS"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3AVARIANT-FORMS">VARIANT-FORMS</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns a list of variant forms for the given object.
+
+See <a href="#OXENFURT:LEXICAL-ENTRY">LEXICAL-ENTRY</a>
+See <a href="#OXENFURT:ENTRY">ENTRY</a>
+See <a href="#OXENFURT:SENSE">SENSE</a></pre></div> </article> </li><li> <a name="OXENFURT:WORD"> </a> <article id="GENERIC OXENFURT:WORD"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3AWORD">WORD</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns a given written or spoken realisation of a an entry, lowercased.
+
+See <a href="#OXENFURT:WORD">WORD</a>
+See <a href="#OXENFURT:MATCH">MATCH</a></pre></div> </article> </li><li> <a name="OXENFURT:WORDFORM"> </a> <article id="GENERIC OXENFURT:WORDFORM"> <header class="generic"> <span class="type">generic</span>  <code>(</code><h4 class="name"><code><a href="#GENERIC%20OXENFURT%3AWORDFORM">WORDFORM</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <div class="docstring"><pre>Returns a given written realisation of an entry, preserving case.
+
+See <a href="#OXENFURT:FREQUENCY">FREQUENCY</a></pre></div> </article> </li></ul> </li></ul> </article>  </main> </body> </html> 
