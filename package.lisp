@@ -24,7 +24,7 @@
    #:list-regions
    #:list-grammatical-features
    #:inflections
-   #:words
+   #:find-word
    #:search-words
    #:list-words
    #:word-frequency

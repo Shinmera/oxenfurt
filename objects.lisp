@@ -27,7 +27,7 @@
    target-lang))
 
 (defmethod bilingual-p ((dataset language-dataset))
-  (not (null (target dataset))))
+  (not (null (target-lang dataset))))
 
 (define-unprintable-printer language-dataset
   "~s ~a~@[ (~a)~]~@[ <=> ~a~]"

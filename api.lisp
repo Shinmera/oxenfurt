@@ -107,7 +107,7 @@
 (defun inflections (word &key (source-lang "en") filters)
   (into 'word (request "/inflections" (list source-lang word (serialize-filters filters)))))
 
-(defun words (word &key (source-lang "en") filters synonyms antonyms target-lang sentences)
+(defun find-word (word &key (source-lang "en") filters synonyms antonyms target-lang sentences)
   (when (and filters (or synonyms antonyms target-lang sentences))
     (error "Filters cannot be applied in combination with synonyms, antonyms, translations, or sentences."))
   (when (and (or synonyms antonyms) (or filters target-lang sentences))
@@ -116,13 +116,13 @@
     (error "Translations cannot be fetched in combination with synonyms, antonyms, filters, or sentences."))
   (when (and sentences (or filters synonyms antonyms target-lang))
     (error "Sentences cannot be fetched in combination with synonyms, antonyms, filters, or translations."))
-  (into 'word (request "/entries" (list source-lang word
-                                        (serialize-filters filters)
-                                        (if (and synonyms antonyms)
-                                            "synonyms;antonyms"
-                                            (or synonyms antonyms))
-                                        (when target-lang (format NIL "translations=~a" target-lang))
-                                        (when sentences "sentences")))))
+  (into 'word (first (request "/entries" (list source-lang word
+                                               (serialize-filters filters)
+                                               (if (and synonyms antonyms)
+                                                   "synonyms;antonyms"
+                                                   (or synonyms antonyms))
+                                               (when target-lang (format NIL "translations=~a" target-lang))
+                                               (when sentences "sentences"))))))
 
 (defun search-words (query &key (source-lang "en") prefix regions target-lang (offset 0) (limit 5000))
   (into 'match (request "/search" (list source-lang (when target-lang (format NIL "translations=~a" target-lang)))

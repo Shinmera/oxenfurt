@@ -76,7 +76,7 @@ See LANGUAGE-DATASET")
 
 See WORD")
   
-  (function words
+  (function find-word
     "Retrieve dictionary information for a given word.
 
 The parameters FILTERS, SYNONYMS/ANTONYMS, TARGET-LANG, and SENTENCES
@@ -273,7 +273,7 @@ See WORDFORM")
 See REGION
 See SOURCE
 See LANGUAGE
-See TARGET
+See TARGET-LANG
 See BILINGUAL-P")
   
   (type lexical-entry
@@ -335,7 +335,7 @@ See DOMAINS
 See EXAMPLES
 See ID
 See NOTES
-See PRONUNCATIONS
+See PRONUNCIATIONS
 See REGIONS
 See REGISTERS
 See SUBSENSES
