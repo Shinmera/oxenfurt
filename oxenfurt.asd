@@ -13,6 +13,8 @@
   :homepage "https://github.com/Shinmera/oxenfurt"
   :serial T
   :components ((:file "package")
+               (:file "toolkit")
+               (:file "objects")
                (:file "api")
                (:file "documentation"))
   :depends-on (:documentation-utils
