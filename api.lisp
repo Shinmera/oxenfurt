@@ -124,8 +124,8 @@
                                         (when target-lang (format NIL "translations=~a" target-lang))
                                         (when sentences "sentences")))))
 
-(defun search-words (query &key (source-lang "en") prefix regions translations (offset 0) (limit 5000))
-  (into 'match (request "/search" (list source-lang (when translations (format NIL "translations=~a" translations)))
+(defun search-words (query &key (source-lang "en") prefix regions target-lang (offset 0) (limit 5000))
+  (into 'match (request "/search" (list source-lang (when target-lang (format NIL "translations=~a" target-lang)))
                         :parameters `(("q" . ,query)
                                       ("prefix" . ,(bool->string prefix))
                                       ("regions" . ,(format NIL "~{~a~^~}" regions))
