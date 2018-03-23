@@ -36,7 +36,6 @@
    #:entry
    #:example
    #:frequency
-   #:inflection
    #:language-dataset
    #:lexical-entry
    #:match
@@ -49,6 +48,7 @@
    #:word
    ;; Slots
    #:audio-file
+   #:bilingual-p
    #:components
    #:cross-reference-markers
    #:cross-references
@@ -89,7 +89,7 @@
    #:sentences
    #:source
    #:subsenses
-   #:target
+   #:target-lang
    #:text
    #:tokens
    #:translations

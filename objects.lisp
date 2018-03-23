@@ -24,35 +24,20 @@
   (region
    source
    language
-   target))
+   target-lang))
 
 (defmethod bilingual-p ((dataset language-dataset))
   (not (null (target dataset))))
 
 (define-unprintable-printer language-dataset
   "~s ~a~@[ (~a)~]~@[ <=> ~a~]"
-  (source language-dataset) (language language-dataset) (region language-dataset) (target language-dataset))
+  (source language-dataset) (language language-dataset) (region language-dataset) (target-lang language-dataset))
 
 (define-converter 'language-dataset
   :region (param->key (=> "region"))
   :source (=> "source")
   :language (param->key (=> "sourceLanguage" "id"))
-  :target (param->key (=> "targetLanguage" "id")))
-
-(define-oxenfurt-class inflection ()
-  (id
-   language
-   word
-   lexical-entries))
-
-(define-unprintable-printer inflection
-  "~s ~a" (id inflection) (language inflection))
-
-(define-converter inflection
-  :id (=> "id")
-  :language (param->key (=> "language"))
-  :word (=> "word")
-  :lexical-entries (into 'lexical-entry (=> "lexicalEntries")))
+  :target-lang (param->key (=> "targetLanguage" "id")))
 
 (define-oxenfurt-class lexical-entry ()
   (grammatical-features
@@ -226,7 +211,7 @@
 (define-converter cross-reference
   :id (=> "id")
   :text (=> "text")
-  :kind (=> "kind"))
+  :kind (special->key (=> "kind")))
 
 (define-oxenfurt-class example ()
   (definitions

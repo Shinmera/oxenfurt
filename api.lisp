@@ -105,7 +105,7 @@
           collect (loop for key being the hash-keys of val collect (special->key key)))))
 
 (defun inflections (word &key (source-lang "en") filters)
-  (into 'inflection (request "/inflections" (list source-lang word (serialize-filters filters)))))
+  (into 'word (request "/inflections" (list source-lang word (serialize-filters filters)))))
 
 (defun words (word &key (source-lang "en") filters synonyms antonyms target-lang sentences)
   (when (and filters (or synonyms antonyms target-lang sentences))

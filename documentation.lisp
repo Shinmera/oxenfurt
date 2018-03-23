@@ -74,7 +74,7 @@ See LANGUAGE-DATASET")
   (function inflections
     "Check whether a given word exists in the dictionary and retrieve its root form.
 
-See INFLECTION")
+See WORD")
   
   (function words
     "Retrieve dictionary information for a given word.
@@ -206,197 +206,486 @@ See FREQUENCY"))
 ;;; objects.lisp
 (docs:define-docs
   (type cross-reference
-    "")
+    "Represents a cross reference between senses.
+
+The KIND shows how the words are related. Can be either
+:close-match :related :see-also :variant-spelling :abbreviation
+:pre :post.
+
+See ID
+See TEXT
+See KIND")
   
   (type derivative
-    "")
+    "Represents a related entry of a sense.
+
+See DOMAINS
+See ID
+See LANGUAGE
+See REGIONS
+See REGISTERS
+See TEXT")
   
   (type entry
-    "")
+    "A word entry in a lexical entry.
+
+See ETYMOLOGIES
+See GRAMMATICAL-FEATURES
+See HOMOGRAPH-NUMBER
+See NOTES
+See PRONUNCIATIONS
+See SENSES
+See VARIANT-FORMS")
   
   (type example
-    "")
+    "Represents an example usage of a word.
+
+See DEFINITIONS
+See DOMAINS
+See NOTES
+See REGIONS
+See REGISTERS
+See SENSE-IDS
+See TEXT
+See TRANSLATIONS")
   
   (type frequency
-    "")
-  
-  (type inflection
-    "")
+    "Container for frequency information of a word or ngram.
+
+In the case of an ngram frequency, only the FREQUENCY and
+the TOKENS fields are guaranteed to be set.
+
+See FREQUENCY
+See NORMALIZED-FREQUENCY
+See LEMMA
+See NORMALIZED-LEMMA
+See TOKENS
+See LEXICAL-CATEGORY
+See GRAMMATICAL-FEATURES
+See COMPONENTS
+See FIRST-MENTION
+See TRUE-CASE
+See WORDFORM")
   
   (type language-dataset
-    "")
+    "Container for information about a language in the API.
+
+See REGION
+See SOURCE
+See LANGUAGE
+See TARGET
+See BILINGUAL-P")
   
   (type lexical-entry
-    "")
+    "An entry of lexical information about a word.
+
+This is the primary information container for a word.
+
+See GRAMMATICAL-FEATURES
+See INFLECTION-OF
+See LANGUAGE
+See LEXICAL-CATEGORY
+See TEXT
+See DERIVATIVE-OF
+See DERIVATIVES
+See ENTRIES
+See NOTES
+See PRONUNCIATIONS
+See VARIANT-FORMS
+See SENTENCES")
   
   (type match
-    "")
+    "Represents a match for a word search query.
+
+See ID
+See INFLECTION-ID
+See MATCH-STRING
+See MATCH-TYPE
+See REGION
+See WORD
+See SCORE")
   
   (type note
-    "")
+    "A human-readable note about an object.
+
+This usually contains associated, additional information for the
+human reader. The KIND is a free-form string that describes what
+this note might contain.
+
+See ID
+See TEXT
+See KIND")
   
   (type pronunciation
-    "")
+    "Represents information about the pronunciation of a lexical entry.
+
+See AUDIO-FILE
+See DIALECTS
+See REGIONS
+See PHONETIC-NOTATION
+See PHONETIC-SPELLING")
   
   (type sense
-    "")
+    "Represents information about a specific sense or meaning of a word.
+
+See CROSS-REFERENCE-MARKERS
+See CROSS-REFERENCES
+See DEFINITIONS
+See DOMAINS
+See EXAMPLES
+See ID
+See NOTES
+See PRONUNCATIONS
+See REGIONS
+See REGISTERS
+See SUBSENSES
+See TRANSLATIONS
+See VARIANT-FORMS")
   
   (type sentence
-    "")
+    "Represents information about an example usage sentence for a word.
+
+See DEFINITIONS
+See DOMAINS
+See NOTES
+See REGIONS
+See REGISTERS
+See SENSE-IDS
+See TEXT
+See TRANSLATIONS")
   
   (type translation
-    "")
+    "Represents information about a translation of a word into a different language.
+
+See DOMAINS
+See GRAMMATICAL-FEATURES
+See LANGUAGE
+See NOTES
+See REGIONS
+See REGISTERS
+See TEXT")
   
   (type variant-form
-    "")
+    "Represents information about an alternate form of a word that can be used interchangeably.
+
+See REGIONS
+See TEXT")
   
   (type word
-    "")
+    "Represents a specific word in the dictionary.
+
+See ID
+See LANGUAGE
+See LEXICAL-ENTRIES
+See PRONUNCIATIONS
+See WORD")
   
   ;; Slots
   (function audio-file
-    "")
+    "Returns the URL of a sound file for the pronunciation.
+
+See PRONUNCIATION")
+
+  (function bilingual-p
+    "Returns whether the language is bilingual (can be translated).
+
+See LANGUAGE-DATASET")
   
   (function components
-    "")
+    "Returns the components of a frequency result.
+
+See FREQUENCY")
   
   (function cross-reference-markers
-    "")
+    "Returns a grouping of cross reference notes.
+
+See SENSE")
   
   (function cross-references
-    "")
+    "Returns a list of cross-references.
+
+See SENSE")
   
   (function definitions
-    "")
+    "Returns a list of definitions for the exact meaning of the object.
+
+See SENSE
+See EXAMPLE
+See SENTENCE")
   
   (function derivative-of
-    "")
+    "Returns a list of other words from which this one derives.
+
+See LEXICAL-ENTRY")
   
   (function derivatives
-    "")
+    "Returns a list of other words which derive from this one.
+
+See LEXICAL-ENTRY")
   
   (function dialects
-    "")
+    "Returns a list of dialects in which this pronunciation is used.
+
+See PRONUNCIATION")
   
   (function domains
-    "")
+    "Returns the name of a subject, discipline, or branch of knowledge related to this object.
+
+See DERIVATIVE
+See SENSE
+See EXAMPLE
+See TRANSLATION
+See SENTENCE")
   
   (function entries
-    "")
+    "Returns the list of word entries for this lexical entry.
+
+See LEXICAL-ENTRY")
   
   (function etymologies
-    "")
+    "Returns a list of strings describing the etymology of the word.
+
+See ENTRY")
   
   (function examples
-    "")
+    "Returns a list of example usages of the word.
+
+See SENSE")
   
   (function first-mention
-    "")
+    "Returns a date formatted as a string representing the time this word was first observed.
+
+See FREQUENCY")
   
   (function frequency
-    "")
+    "Returns a number representing the usage frequency of the word or ngram.
+
+See FREQUENCY")
   
   (function grammatical-features
-    "")
+    "Returns a plist of applicable grammatical features and their values.
+
+See LEXICAL-ENTRY
+See FREQUENCY
+See TRANSLATION
+See ENTRY")
   
   (function homograph-number
-    "")
+    "Identifies the homograph grouping.
+
+The last two digits identify different entries of the same homograph.
+The first one/two digits identify the homograph number.
+
+See ENTRY")
   
   (function id
-    "")
+    "The identifier of the word this object is about.
+
+See NOTE
+See DERIVATIVE
+See SENSE
+See CROSS-REFERENCE
+See MATCH
+See WORD")
   
   (function inflection-id
-    "")
+    "The identifier for the specific inflection of the word that was matched.
+
+See MATCH")
   
   (function inflection-of
-    "")
+    "Returns a list of word IDs for which this lexical entry is an inflection.
+
+See LEXICAL-ENTRY")
   
   (function kind
-    "")
+    "Returns an identifier for the kind of data this object carries.
+
+See NOTE
+See CROSS-REFERENCE")
   
   (function language
-    "")
+    "Returns a language identifier for which this object is meant.
+
+See DERIVATIVE
+See TRANSLATION
+See LANGUAGE-DATASET
+See LEXICAL-ENTRY
+See WORD")
   
   (function lemma
-    "")
+    "Returns the lemma for which this frequency applies.
+
+See FREQUENCY")
   
   (function lexical-category
-    "")
+    "Returns the linguistic category for which this word qualifies.
+
+Generally the category is defined by the syntactic or morphological
+behaviour of the lexical item in question, such as noun or verb.
+
+See FREQUENCY
+See LEXICAL-ENTRY")
   
   (function lexical-entries
-    "")
+    "Returns a list of lexical entries that this word represents.
+
+See WORD")
   
   (function match-string
-    "")
+    "Returns the string that was used to match.
+
+See MATCH")
   
   (function match-type
-    "")
+    "Returns the kind of match that occurred.
+
+See MATCH")
   
   (function normalized-frequency
-    "")
+    "Returns the normalized frequency number.
+
+This is the frequency per million based on a corpus.
+
+See FREQUENCY")
   
   (function normalized-lemma
-    "")
+    "Returns the normalised form of the lemma.
+
+See FREQUENCY")
   
   (function notes
-    "")
+    "Returns a list of notes about this object.
+
+See LEXICAL-ENTRY
+See ENTRY
+See SENSE
+See EXAMPLE
+See TRANSLATION
+See SENTENCE")
   
   (function phonetic-notation
-    "")
+    "Returns an identifier for the phonetic notation used to describe the pronunciation.
+
+See PRONUNCIATION")
   
   (function phonetic-spelling
-    "")
+    "Returns a string describing how this word should be pronounced in some notation.
+
+See PRONUNCIATION")
   
   (function pronunciations
-    "")
+    "Returns a list of possible pronunciations for this object.
+
+See LEXICAL-ENTRY
+See ENTRY
+See WORD
+See SENSE")
   
   (function region
-    "")
+    "Returns the name of a region for which this match applies.
+
+See MATCH")
   
   (function regions
-    "")
+    "Returns a list of region names to which this object applies.
+
+See PRONUNCIATION
+See DERIVATIVE
+See VARIANT-FORM
+See SENSE
+See EXAMPLE
+See TRANSLATION
+See SENTENCE")
   
   (function registers
-    "")
+    "Returns a list describing the level of language usage, typically with respect to formality.
+
+See DERIVATIVE
+See SENSE
+See EXAMPLE
+See TRANSLATION
+See SENTENCE")
   
   (function score
-    "")
+    "Returns a number representing how highly this match scored in the search.
+
+See MATCH")
   
   (function sense-ids
-    "")
+    "Returns a list of IDs for senses related to this object.
+
+See EXAMPLE
+See SENTENCE")
   
   (function senses
-    "")
+    "Returns a list of senses for this entry.
+
+See ENTRY")
   
   (function sentences
-    "")
+    "Returns a list of example usage sentences for this lexical entry.
+
+See LEXICAL-ENTRY")
   
   (function source
-    "")
+    "Returns a string description of the source of the dictionary.
+
+See LANGUAGE-DATASET")
   
   (function subsenses
-    "")
+    "Returns an ordered list of subsenses of a sense.
+
+See SENSE")
   
-  (function target
-    "")
+  (function target-lang
+    "Returns a descriptor for the target language of a translation dataset.
+
+See LANGUAGE-DATASET")
   
   (function text
-    "")
+    "Returns a full text representation of the object.
+
+See LEXICAL-ENTRY
+See NOTE
+See DERIVATIVE
+See VARIANT-FORM
+See CROSS-REFERENCE
+See EXAMPLE
+See TRANSLATION
+See SENTENCE")
   
   (function tokens
-    "")
+    "Returns the ngram tokens for the frequency result.
+
+See FREQUENCY")
   
   (function translations
-    "")
+    "Returns a list of translations for the given object.
+
+See SENSE
+See EXAMPLE
+See SENTENCE")
   
   (function true-case
-    "")
+    "Returns a given written realisation of an entry, typically in lower case.
+
+See FREQUENCY")
   
   (function variant-forms
-    "")
+    "Returns a list of variant forms for the given object.
+
+See LEXICAL-ENTRY
+See ENTRY
+See SENSE")
   
   (function word
-    "")
+    "Returns a given written or spoken realisation of a an entry, lowercased.
+
+See WORD
+See MATCH")
   
   (function wordform
-    ""))
+    "Returns a given written realisation of an entry, preserving case.
+
+See FREQUENCY"))
