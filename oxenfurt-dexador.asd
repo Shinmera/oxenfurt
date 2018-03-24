@@ -4,13 +4,14 @@
  Author: Nicolas Hafner <shinmera@tymoon.eu>
 |#
 
-(asdf:defsystem oxenfurt
+(asdf:defsystem oxenfurt-dexador
   :version "1.0.0"
   :license "Artistic"
   :author "Nicolas Hafner <shinmera@tymoon.eu>"
   :maintainer "Nicolas Hafner <shinmera@tymoon.eu>"
-  :description "A client for the Oxford dictionary API."
+  :description "Dexador client backend for Oxenfurt."
   :homepage "https://github.com/Shinmera/oxenfurt"
   :serial T
-  :components ()
-  :depends-on (:oxenfurt-dexador))
+  :components ((:file "dexador"))
+  :depends-on (:dexador
+               :oxenfurt-core))

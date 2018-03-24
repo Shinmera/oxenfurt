@@ -17,12 +17,9 @@
   (:report (lambda (c s) (format s "Oxford API replied with code ~a on ~a:~%  ~a"
                                  (result c) (url c) (body c)))))
 
-(defun parameters->string (params)
-  (with-output-to-string (out)
-    (loop for cons on params
-          for param = (car cons)
-          do (format out "~a=~a" (url-encode (car param)) (url-encode (cdr param)))
-             (when (cdr cons) (format out "&")))))
+(defun %request (url parameters key id)
+  (declare (ignore url parameters key id))
+  (error "No HTTP client backend is loaded."))
 
 (defun request (base parts &key (key *app-key*) (id *app-id*) parameters)
   (let ((url (format NIL "~a~a~{/~a~}" *api* base
@@ -30,12 +27,7 @@
                            when part
                            collect (url-encode part)))))
     (multiple-value-bind (stream result)
-        (let ((url (quri:merge-uris (quri:make-uri :query (parameters->string parameters)) (quri:uri url))))
-          (dex:get url :headers `(("Accept" . "application/json")
-                                  ("Accept-Charset" . "UTF-8")
-                                  ("app_key" . ,key)
-                                  ("app_id" . ,id))
-                       :want-stream T))
+        (%request url parameters key id)
       (unwind-protect
            (cond ((/= 200 result)
                   (error 'api-call-failed :url url :result result
