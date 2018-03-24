@@ -1,5 +1,5 @@
 ## About Oxenfurt
-This library implements a client for the [Oxford dictionary API](A given written or spoken realisation of a an entry, lowercased.). It gives you full access to the available REST endpoints and transforms all results into native Lisp instances for easy handling.
+This library implements a client for the [Oxford dictionary API](https://developer.oxforddictionaries.com/). It gives you full access to the available REST endpoints and transforms all results into native Lisp instances for easy handling.
 
 ## How To
 First you'll need to sign up for their API and get the App keys. Once you have registered, you can find the keys [here](https://developer.oxforddictionaries.com/admin/applications). Then, set the library up with your keys:
