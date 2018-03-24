@@ -27,7 +27,7 @@
                            when part
                            collect (url-encode part)))))
     (multiple-value-bind (stream result)
-        (%request url parameters key id)
+        (%request url (remove NIL parameters :key #'cdr) key id)
       (unwind-protect
            (cond ((/= 200 result)
                   (error 'api-call-failed :url url :result result
@@ -126,7 +126,7 @@
   (into 'match (request "/search" (list source-lang (when target-lang (format NIL "translations=~a" target-lang)))
                         :parameters `(("q" . ,query)
                                       ("prefix" . ,(bool->string prefix))
-                                      ("regions" . ,(format NIL "~{~a~^~}" regions))
+                                      ("regions" . ,(when regions (format NIL "~{~a~^~}" regions)))
                                       ("offset" . ,(princ-to-string offset))
                                       ("limit" . ,(princ-to-string limit))))))
 

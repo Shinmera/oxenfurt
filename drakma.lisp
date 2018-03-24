@@ -17,4 +17,4 @@
                          :external-format-out :utf-8
                          :want-stream T
                          :decode-content T
-                         :parameters (remove NIL parameters :key #'cdr))))
+                         :parameters parameters)))
