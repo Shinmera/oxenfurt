@@ -205,6 +205,16 @@ See FREQUENCY"))
 
 ;;; objects.lisp
 (docs:define-docs
+  (type antonym
+    "Represents an antonym of a sense.
+
+See DOMAINS
+See ID
+See LANGUAGE
+See REGIONS
+See REGISTERS
+See TEXT")
+  
   (type cross-reference
     "Represents a cross reference between senses.
 
@@ -353,6 +363,16 @@ See REGISTERS
 See SENSE-IDS
 See TEXT
 See TRANSLATIONS")
+
+  (type synonym
+    "Represents a synonym of a sense.
+
+See DOMAINS
+See ID
+See LANGUAGE
+See REGIONS
+See REGISTERS
+See TEXT")
   
   (type translation
     "Represents information about a translation of a word into a different language.
@@ -431,6 +451,8 @@ See PRONUNCIATION")
   (function domains
     "Returns the name of a subject, discipline, or branch of knowledge related to this object.
 
+See ANTONYM
+See SYNONYM
 See DERIVATIVE
 See SENSE
 See EXAMPLE
@@ -481,6 +503,8 @@ See ENTRY")
   (function id
     "The identifier of the word this object is about.
 
+See ANTONYM
+See SYNONYM
 See NOTE
 See DERIVATIVE
 See SENSE
@@ -507,6 +531,8 @@ See CROSS-REFERENCE")
   (function language
     "Returns a language identifier for which this object is meant.
 
+See ANTONYM
+See SYNONYM
 See DERIVATIVE
 See TRANSLATION
 See LANGUAGE-DATASET
@@ -590,6 +616,8 @@ See MATCH")
   (function regions
     "Returns a list of region names to which this object applies.
 
+See ANTONYM
+See SYNONYM
 See PRONUNCIATION
 See DERIVATIVE
 See VARIANT-FORM
@@ -601,6 +629,8 @@ See SENTENCE")
   (function registers
     "Returns a list describing the level of language usage, typically with respect to formality.
 
+See ANTONYM
+See SYNONYM
 See DERIVATIVE
 See SENSE
 See EXAMPLE
@@ -646,6 +676,8 @@ See LANGUAGE-DATASET")
   (function text
     "Returns a full text representation of the object.
 
+See ANTONYM
+See SYNONYM
 See LEXICAL-ENTRY
 See NOTE
 See DERIVATIVE

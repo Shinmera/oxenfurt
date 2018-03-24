@@ -31,6 +31,7 @@
    #:ngram-frequency)
   ;; objects.lisp
   (:export
+   #:antonym
    #:cross-reference
    #:derivative
    #:entry
@@ -43,6 +44,7 @@
    #:pronunciation
    #:sense
    #:sentence
+   #:synonym
    #:translation
    #:variant-form
    #:word
@@ -98,4 +100,5 @@
    #:word
    #:wordform)
   ;; toolkit.lisp
-  (:export))
+  (:export
+   #:describe-tree))

@@ -180,7 +180,9 @@
    registers
    subsenses
    translations
-   variant-forms))
+   variant-forms
+   synonyms
+   antonyms))
 
 (define-unprintable-printer sense
   "~s" (id sense))
@@ -198,7 +200,9 @@
   :registers (mapcar #'special->key (=> "registers"))
   :subsenses (into 'sense (=> "subsenses"))
   :translations (into 'translation (=> "translations"))
-  :variant-forms (into 'variant-form (=> "variantForms")))
+  :variant-forms (into 'variant-form (=> "variantForms"))
+  :synonyms (into 'synonym (=> "synonyms"))
+  :antonyms (into 'antonym (=> "antonyms")))
 
 (define-oxenfurt-class cross-reference ()
   (id
@@ -329,3 +333,41 @@
   :first-mention (=> "firstMention")
   :true-case (=> "trueCase")
   :wordform (=> "wordform"))
+
+(define-oxenfurt-class synonym ()
+  (domains
+   id
+   language
+   regions
+   registers
+   text))
+
+(define-unprintable-printer synonym
+  "~s ~a" (id synonym) (language synonym))
+
+(define-converter synonym
+  :domains (mapcar #'special->key (=> "domains"))
+  :id (=> "id")
+  :language (param->key (=> "language"))
+  :regions (=> "regions")
+  :registers (mapcar #'special->key (=> "registers"))
+  :text (=> "text"))
+
+(define-oxenfurt-class antonym ()
+  (domains
+   id
+   language
+   regions
+   registers
+   text))
+
+(define-unprintable-printer antonym
+  "~s ~a" (id antonym) (language antonym))
+
+(define-converter antonym
+  :domains (mapcar #'special->key (=> "domains"))
+  :id (=> "id")
+  :language (param->key (=> "language"))
+  :regions (=> "regions")
+  :registers (mapcar #'special->key (=> "registers"))
+  :text (=> "text"))

@@ -118,9 +118,9 @@
     (error "Sentences cannot be fetched in combination with synonyms, antonyms, filters, or translations."))
   (into 'word (first (request "/entries" (list source-lang word
                                                (serialize-filters filters)
-                                               (if (and synonyms antonyms)
-                                                   "synonyms;antonyms"
-                                                   (or synonyms antonyms))
+                                               (cond ((and synonyms antonyms) "synonyms;antonyms")
+                                                     (synonyms "synonyms")
+                                                     (antonyms "antonyms"))
                                                (when target-lang (format NIL "translations=~a" target-lang))
                                                (when sentences "sentences"))))))
 
