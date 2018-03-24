@@ -131,3 +131,56 @@
                         slot
                         (list slot :initarg (intern (string slot) "KEYWORD") :reader slot)))
      ,@options))
+
+(defun class-direct-slots (class)
+  ()
+  #+abcl      (mop:class-direct-slots class)
+  #+allegro   (mop:class-direct-slots class)
+  #+clisp     (clos:class-direct-slots class)
+  #+clozure   (ccl:class-direct-slots class)
+  #+cmu       (clos-mop:class-direct-slots class)
+  #+ecl       (clos:class-direct-slots class)
+  #+lispworks (clos:class-direct-slots class)
+  #+mcl       (ccl:class-direct-slots class)
+  #+sbcl      (sb-mop:class-direct-slots class)
+  #+scl       (clos:class-direct-slots class))
+
+(defun slot-definition-name (slot)
+  ()
+  #+abcl      (mop:slot-definition-name slot)
+  #+allegro   (mop:slot-definition-name slot)
+  #+clisp     (clos:slot-definition-name slot)
+  #+clozure   (ccl:slot-definition-name slot)
+  #+cmu       (clos-mop:slot-definition-name slot)
+  #+ecl       (clos:slot-definition-name slot)
+  #+lispworks (clos:slot-definition-name slot)
+  #+mcl       (ccl:slot-definition-name slot)
+  #+sbcl      (sb-mop:slot-definition-name slot)
+  #+scl       (clos:slot-definition-name slot))
+
+(defmethod describe-tree ((object standard-object) &optional (indent 0))
+  (loop for slot in (class-direct-slots (class-of object))
+        for name = (slot-definition-name slot)
+        for value = (slot-value object name)
+        do (when value
+             (format T "~&~v{ ~}~a~vt" indent 0 name (+ indent 20))
+             (typecase value
+               (standard-object
+                (format T "[~a]" (type-of object))
+                (describe-tree value (+ indent 1)))
+               (cons
+                (typecase (first value)
+                  (keyword
+                   (format T "[PLIST]")
+                   (loop for (key val) on value by #'cddr
+                         do (format T "~&~v{ ~}~s~vt~s" (+ indent 2) 0 key (+ indent 20) val)))
+                  (string
+                   (format T "([STRING])")
+                   (dolist (item value)
+                     (format T "~&~v{ ~}~s" (+ indent 2) 0 item)))
+                  (T
+                   (format T "([~a])" (type-of (first value)))
+                   (dolist (item value)
+                     (describe-tree item (+ indent 2))))))
+               (T (format T "~s" value)))))
+  object)

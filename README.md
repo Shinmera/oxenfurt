@@ -11,25 +11,34 @@ Once that's done, you should be able to query the API to your heart's content...
 
 Oxford's API is fairly extensive in what it returns. For instance, if we look at the result for "lisp":
 
-    (lexical-entries (find-word "lisp"))
+    (oxenfurt:lexical-entries (oxenfurt:find-word "lisp"))
     ; => (#<LEXICAL-ENTRY "lisp" EN> #<LEXICAL-ENTRY "lisp" EN> #<LEXICAL-ENTRY "Lisp" EN>)
     
-    (describe (first *))
-    ; #<LEXICAL-ENTRY "lisp" EN>
-    ;   [standard-object]
-    ; 
-    ; Slots with :INSTANCE allocation:
-    ;   GRAMMATICAL-FEATURES           = NIL
-    ;   INFLECTION-OF                  = NIL
-    ;   LANGUAGE                       = :EN
-    ;   LEXICAL-CATEGORY               = :NOUN
-    ;   TEXT                           = "lisp"
-    ;   DERIVATIVE-OF                  = NIL
-    ;   DERIVATIVES                    = (#<DERIVATIVE "lisper" NIL>)
-    ;   ENTRIES                        = (#<ENTRY {1006578ED3}>)
-    ;   NOTES                          = NIL
-    ;   PRONUNCIATIONS                 = (#<PRONUNCIATION "lÉªsp" (IPA) British English>)
-    ;   VARIANT-FORMS                  = NIL
-    ;   SENTENCES                      = NIL
+    (oxenfurt:describe-tree (first *))
+    ; LANGUAGE            :EN
+    ; LEXICAL-CATEGORY    :NOUN
+    ; TEXT                "lisp"
+    ; DERIVATIVES         ([DERIVATIVE])
+    ;   ID                  "lisper"
+    ;   TEXT                "lisper"
+    ; ENTRIES             ([ENTRY])
+    ;   ETYMOLOGIES         ([STRING])
+    ;     "Old English wlispian (recorded in Äwlyspian), from wlisp (adjective) âlispingâ, of imitative origin; compare with Dutch lispen and German lispeln"
+    ;   GRAMMATICAL-FEATURES [PLIST]
+    ;     :NUMBER           :SINGULAR
+    ;   HOMOGRAPH-NUMBER    0
+    ;   SENSES              ([SENSE])
+    ;     DEFINITIONS         ([STRING])
+    ;       "a speech defect in which s is pronounced like th in thick and z is pronounced like th in this"
+    ;     DOMAINS             [PLIST]
+    ;       :PHONETICS        NIL
+    ;     EXAMPLES            ([EXAMPLE])
+    ;       TEXT                "he spoke with a slight lisp"
+    ;     ID                  "m_en_gbus0586220.005"
+    ; PRONUNCIATIONS      ([PRONUNCIATION])
+    ;   DIALECTS            ([STRING])
+    ;     "British English"
+    ;   PHONETIC-NOTATION   "IPA"
+    ;   PHONETIC-SPELLING   "lÉªsp"
 
-While Oxford's API documentation does cover everything, it is a bit obtuse to handle. The documentation of this project includes descriptions for every object type and field that is returned, perhaps that will be easier to navigate.
+While Oxford's API documentation does cover everything, it is a bit obtuse to handle. The documentation of this project includes descriptions for every object type and field that is returned, perhaps that will be easier to navigate. If you prefer to explore, the above `describe-tree` function should also provide a good tool to figure out where relevant information is stored.
