@@ -338,6 +338,7 @@ See PHONETIC-SPELLING")
   (type sense
     "Represents information about a specific sense or meaning of a word.
 
+See ANTONYMS
 See CROSS-REFERENCE-MARKERS
 See CROSS-REFERENCES
 See DEFINITIONS
@@ -349,6 +350,7 @@ See PRONUNCIATIONS
 See REGIONS
 See REGISTERS
 See SUBSENSES
+See SYNONYMS
 See TRANSLATIONS
 See VARIANT-FORMS")
   
@@ -401,6 +403,11 @@ See PRONUNCIATIONS
 See WORD")
   
   ;; Slots
+  (function antonyms
+    "Returns the list of antonyms for the sense.
+
+See SENSE")
+  
   (function audio-file
     "Returns the URL of a sound file for the pronunciation.
 
@@ -665,6 +672,11 @@ See LANGUAGE-DATASET")
   
   (function subsenses
     "Returns an ordered list of subsenses of a sense.
+
+See SENSE")
+
+  (function synonyms
+    "Returns a list of synonyms for the sense.
 
 See SENSE")
   

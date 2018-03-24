@@ -49,6 +49,7 @@
    #:variant-form
    #:word
    ;; Slots
+   #:antonyms
    #:audio-file
    #:bilingual-p
    #:components
@@ -91,6 +92,7 @@
    #:sentences
    #:source
    #:subsenses
+   #:synonyms
    #:target-lang
    #:text
    #:tokens
