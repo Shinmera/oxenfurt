@@ -175,12 +175,13 @@
                    (loop for (key val) on value by #'cddr
                          do (format T "~&~v{ ~}~s~vt~s" (+ indent 2) 0 key (+ indent 20) val)))
                   (string
-                   (format T "([STRING])")
+                   (format T "([STRING] ~a)" (length value))
                    (dolist (item value)
                      (format T "~&~v{ ~}~s" (+ indent 2) 0 item)))
                   (T
-                   (format T "([~a])" (type-of (first value)))
+                   (format T "([~a] ~a)" (type-of (first value)) (length value))
                    (dolist (item value)
-                     (describe-tree item (+ indent 2))))))
+                     (describe-tree item (+ indent 2))
+                     (format T "~&~v{ ~}--" (+ indent 2) 0)))))
                (T (format T "~s" value)))))
   object)
