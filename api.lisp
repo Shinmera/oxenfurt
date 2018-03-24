@@ -24,8 +24,10 @@
                            collect (url-encode part)))))
     (multiple-value-bind (stream result)
         (drakma:http-request url
-                             :accept "application/json"
-                             :additional-headers `(("app_key" . ,key) ("app_id" . ,id))
+                             :accept "application/json;charset=UTF-8"
+                             :additional-headers `(("app_key" . ,key)
+                                                   ("app_id" . ,id)
+                                                   ("Accept-Charset" . "UTF-8"))
                              :external-format-in :utf-8
                              :external-format-out :utf-8
                              :want-stream T
