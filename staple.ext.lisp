@@ -1,0 +1,5 @@
+(asdf:load-system :staple-markdown)
+(defmethod staple:packages ((system (eql (asdf:find-system :oxenfurt))))
+  (list (find-package :oxenfurt)))
+(defmethod staple:subsystems ((system (eql (asdf:find-system :oxenfurt))))
+  (list))
