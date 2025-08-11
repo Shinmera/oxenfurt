@@ -4,9 +4,9 @@
   :author "Yukari Hafner <shinmera@tymoon.eu>"
   :maintainer "Yukari Hafner <shinmera@tymoon.eu>"
   :description "A client for the Oxford dictionary API."
-  :homepage "https://Shinmera.github.io/oxenfurt/"
-  :bug-tracker "https://github.com/Shinmera/oxenfurt/issues"
-  :source-control (:git "https://github.com/Shinmera/oxenfurt.git")
+  :homepage "https://shinmera.com/docs/oxenfurt/"
+  :bug-tracker "https://shinmera.com/project/oxenfurt/issues"
+  :source-control (:git "https://shinmera.com/project/oxenfurt.git")
   :serial T
   :components ()
   :depends-on (:oxenfurt-dexador))
